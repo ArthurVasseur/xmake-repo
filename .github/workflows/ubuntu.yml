@@ -30,8 +30,12 @@ jobs:
         run: |
           # TODO we will remove it later
           sudo apt-get update
-          sudo apt-get install -y libgl1-mesa-dev libglu1-mesa-dev p7zip gobjc gcc g++ x11proto-dev
-
+          sudo apt-get install -y libgl1-mesa-dev libglu1-mesa-dev p7zip gobjc gcc g++
+          curl https://xorg.freedesktop.org/archive/individual/proto/xorgproto-2023.2.tar.xz -o xorgproto-2023.2
+          cd xorgproto-2023.2
+          mkdir build && cd build && meson setup --prefix=$XORG_PREFIX .. && ninja
+          sudo ninja install
+          sudo mv -v $XORG_PREFIX/share/doc/xorgproto{,-2023.2}
       - name: Tests
         run: |
           xmake l ./scripts/test.lua -D -k ${{ matrix.kind }} -m ${{ matrix.mode }}
