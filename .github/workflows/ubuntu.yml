@@ -31,6 +31,7 @@ jobs:
           # TODO we will remove it later
           sudo apt-get update
           sudo apt-get install -y libgl1-mesa-dev libglu1-mesa-dev p7zip gobjc gcc g++
+          sudo apt-get install meson ninja-build
           curl https://xorg.freedesktop.org/archive/individual/proto/xorgproto-2023.2.tar.xz -o xorgproto-2023.2
           cd xorgproto-2023.2
           mkdir build && cd build && meson setup --prefix=$XORG_PREFIX .. && ninja
