@@ -4,6 +4,7 @@ package("msquic")
     set_license("MIT")
 
     add_urls("https://github.com/microsoft/msquic.git")
+    add_versions("v2.5.5", "v2.5.5")
     add_versions("v1.9.0", "v1.9.0")
 
     add_deps("cmake")
@@ -24,7 +25,7 @@ package("msquic")
         package:add("links", "core", "platform", "ssl", "crypto")
     end)
 
-    on_install("linux", "macosx", function (package)
+    on_install(function (package)
         local configs = {"-DQUIC_BUILD_TOOLS=OFF",
                          "-DQUIC_BUILD_TEST=OFF",
                          "-DQUIC_BUILD_PERF=OFF"}
